@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Error {{ status_code }} - Page Not Found</title>
+
+    <!-- Bootstrap & Custom Fonts -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Body Styling */
+        body {
+            background: #121212;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Error Container */
+        .error-container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .error-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Error Code */
+        .error-code {
+            font-size: 100px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 10px;
+        }
+
+        /* Error Message */
+        .error-message {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        /* Go Back Button */
+        .btn-custom {
+            background: #e63946;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background: #d62839;
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <h1 class="error-code">{{ status_code }}</h1>
+        <h2 class="error-message">{{ message }}</h2>
+        <p>Oops! The page you're looking for doesn't exist or an unexpected error occurred.</p>
+
+        <a href="/" class="btn btn-custom">
+            <i class="bi bi-arrow-left"></i> Go Back to Home
+        </a>
+    </div>
+
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block content %}
+<main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+        <img src="{{image.url}}" alt="" data-aos="fade-in">
+
+        <div class="container" data-aos="zoom-out" data-aos-delay="100">
+            <h2>{{name}}</h2>
+            <p>I'm <span class="typed"
+                         data-typed-items="{% if titles %}{% for title in titles %}{{ title }}{% if not forloop.last %},{% endif %}{% endfor %}{% else %}No one{% endif %}">{{first_title}}</span><span
+                    class="typed-cursor typed-cursor--blink"></span></p>
+            <div class="social-links">
+                {% for media_app in social_media_apps %}
+                <a href="{{media_app.social_media_url}}"><i class="bi bi-{{media_app.social_media_app}}"></i></a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section><!-- /Hero Section -->
+
+</main>
+{% endblock %}

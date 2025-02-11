@@ -1,0 +1,122 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block content %}
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+        <div class="heading">
+            <div class="container">
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <h1>Resume</h1>
+                        <p class="mb-0">{{resume_data.intro}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="{% url 'home:home' %}">Home</a></li>
+                    <li class="current">Resume</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume section">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="resume-title">{{summary.section_title}}</h3>
+                    {% if summary %}
+                    <div class="resume-item pb-0">
+                        <h4>{{summary.name}}</h4>
+                        <p>{{ summary.long_description|linebreaksbr }}</p>
+<!--                        <p><em>{{summary.long_description}}</em></p>-->
+                        <ul>
+                            {% for short_text in summary.short_texts.all %}
+                            <li>{{short_text}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div><!-- Edn Resume Item -->
+                    {% endif %}
+
+                    {% if resume_data.educations.all %}
+                    <h3 class="resume-title">Education</h3>
+                    {% for education in resume_data.educations.all %}
+                    <div class="resume-item">
+                        <h4>{{education.title}}</h4>
+                        {% if education.from_date %}
+                        {% if education.to_date or education.present_on %}
+                        {% if education.present_on %}
+                        <h5>{{education.from_date|date:"M Y"}} - Present</h5>
+                        {% else %}
+                        <h5>{{education.from_date|date:"M Y"}} - {{education.to_date|date:"M Y"}}</h5>
+                        {% endif %}
+                        {% endif %}
+                        {% endif %}
+                        <p><em>{{education.institution}}</em></p>
+                        {% if education.description %}
+                        <p>{{education.description|linebreaksbr}}</p>
+                        {% endif %}
+                    </div><!-- Edn Resume Item -->
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+                {% if resume_data.experiences.all %}
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="resume-title">Professional Experience</h3>
+                    {% for work_experience in resume_data.experiences.all %}
+                    <div class="resume-item">
+                        <h4>{{work_experience.position}}</h4>
+
+                        {% if work_experience.from_date %}
+                        {% if work_experience.to_date or work_experience.present_on %}
+                        <h5>
+                            {{ work_experience.from_date|date:"M Y" }} -
+                            {% if work_experience.present_on %}
+                            Present
+                            {% else %}
+                            {{ work_experience.to_date|date:"M Y" }}
+                            {% endif %}
+                        </h5>
+                        {% endif %}
+                        {% endif %}
+
+                        {% if work_experience.company %}
+                        <p><em>{{work_experience.company}} </em></p>
+                        {% endif %}
+                        <ul>
+                            {% if work_experience.text1 %}
+                            <li>{{work_experience.text1}}</li>
+                            {% endif %}
+                            {% if work_experience.text2 %}
+                            <li>{{work_experience.text2}}</li>
+                            {% endif %}
+                            {% if work_experience.text3 %}
+                            <li>{{work_experience.text3}}</li>
+                            {% endif %}
+                            {% if work_experience.text4 %}
+                            <li>{{work_experience.text4}}</li>
+                            {% endif %}
+                        </ul>
+                    </div><!-- Edn Resume Item -->
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section><!-- /Resume Section -->
+
+</main>
+{% endblock %}
