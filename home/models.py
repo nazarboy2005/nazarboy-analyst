@@ -130,7 +130,7 @@ class SkillsModel(models.Model):
 
 
 class InterestsModel(models.Model):
-    name = models.CharField(max_length=15)
+    name = models.CharField(max_length=35)
     person = models.ForeignKey(AboutPageModel, on_delete=models.CASCADE, related_name='interests')
 
     created_at = models.DateTimeField(auto_now_add=True)
